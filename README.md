@@ -5,3 +5,5 @@ The chip needs the following:
 - a analog input for the brighness potentiometer
 - a PWM output to drive a transitor or MOSFET
 
+You can also use a NE555 as PWM driver. The good thing is, you can drive the NE555 with 12V and drive the LED backlight directly from the chip output. But this chip needs some external components and needs more power consumtion if the backlight is dark as the backlight is in full bright. Thats a little bit strange and you dont have any engery saving with a dark backlight. It's completely opposit. You need more energy with a dark backlight.
+That's the reason that i use the ATtiny85 for this job.
