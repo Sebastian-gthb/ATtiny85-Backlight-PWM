@@ -59,12 +59,12 @@ void loop() {
   analogWrite(BacklightPin, brightness);
   delay(200);
 
-  /*
-  if backlightenablepin = 0
-     analogwrite(backlight, 0);
-     deepsleep();
+
+  if (digitalRead(BacklightEnablePin)==LOW){
+    analogWrite(BacklightPin, 0);
+    deepsleep();
+  }
   
-  */
 
 }
 
