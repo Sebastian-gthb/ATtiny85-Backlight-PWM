@@ -9,8 +9,11 @@ RESET--5/A0--PCINT5--PB5--|1  U  8|--VCC +
                           +-------+
 */
 
-
 #include <Arduino.h>
+//define PINs
+const int BacklightEnablePin = 0; //pin 5 on Attiny85 chip
+const int BacklightPin = 1;       //pin 6 on ATtiny85 chip
+const int PotentiometerPin = A1;  //pin 7 on ATtiny85 chip
 
 
 ISR (PCINT0_vect) {}  // Interrupt Service Routine is calling by external PINs. Which PINs are configured with PCMSK register.
@@ -30,15 +33,17 @@ void deepsleep() {
 
 void setup() {
   //energy safing options
-  ADCSRA &= B01111111; //deactivate ADC with bit 7 in the ADCSRA register = ADEN = ADC Enabled ... to reactivate ADCSRA |= B10000000;
+  //ADCSRA &= B01111111; //deactivate ADC with bit 7 in the ADCSRA register = ADEN = ADC Enabled ... to reactivate ADCSRA |= B10000000;
   //pinMode(0, OUTPUT);  //set all PINs they are not used as output low
-  pinMode(1, OUTPUT);
-  pinMode(2, OUTPUT);
+  //pinMode(1, OUTPUT);
+  //pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
 
-  pinMode(0, INPUT_PULLUP);   //signal from computer for backlight enabled (free or high = enabled; low = disabled)
+  pinMode(BacklightEnablePin, INPUT_PULLUP);   //signal from computer for backlight enabled (free or high = enabled; low = disabled)
+  pinMode(BacklightPin, OUTPUT);               //PWM signal to drive the MOSFED for the LED
+  pinMode(PotentiometerPin, INPUT);            //analog input from potentiometer
 
   PCMSK |= B00000001; // digitalPIN 0                        – | – |PCINT5|PCINT4|PCINT3|PCINT2|PCINT1|PCINT0
   GIFR  |= B00100000; // clear any outstanding interrupts    – |INTF0|PCIF| –| – | – | – | –
@@ -46,6 +51,20 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  int brightness;
+
+  brightness = analogRead(PotentiometerPin);
+  //brightness = map(brightness, 0, 1023, 0, 255);
+  brightness = brightness >> 2;
+  analogWrite(BacklightPin, brightness);
+  delay(200);
+
+  /*
+  if backlightenablepin = 0
+     analogwrite(backlight, 0);
+     deepsleep();
+  
+  */
+
 }
 
