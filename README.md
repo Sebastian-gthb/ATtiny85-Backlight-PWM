@@ -8,4 +8,4 @@ The chip needs the following:
 You can also use a NE555 as PWM driver. The good thing is, you can drive the NE555 with 12V and drive the LED backlight directly from the chip output. But this chip needs some external components and needs more power consumtion if the backlight is dark as the backlight is in full bright. Thats a little bit strange and you dont have any engery saving with a dark backlight. It's completely opposit. You need more energy with a dark backlight.
 That's the reason that i use the ATtiny85 for this job.
 
-The ATtiny85 needs only for the chip with a 10k Ohm prtentiometer a maximum og 2,7mA and in the sleep mode (backlight disabled) 0,9mA. It can be better, but thats the first version.
+The ATtiny85 needs only for the chip with a 10k Ohm potentiometer a maximum of 2,7mA and in the sleep mode (backlight disabled) 0,9mA. It can be better, but thats the first version. After enhancement of the sleep mode (adding deactivating ADC and disabling brown-out detection in sleep mode) the chip needs only 0,13mA and with the 10k Ohm potentiometer 0,57mA. Thats a little bit better.
