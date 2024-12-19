@@ -20,14 +20,19 @@ ISR (PCINT0_vect) {}  // Interrupt Service Routine is calling by external PINs. 
 
 
 void deepsleep() {
+  ADCSRA &=  B01111111; //deactivate ADC with bit 7 in the ADCSRA register = ADEN = ADC Enabled ... to reactivate ADCSRA |= B10000000;
   //ENABLE SLEEP - this enables the sleep mode
   MCUCR |=   B00010000;            //power down mode (SM1=1,SM0=0)     BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
   MCUCR |=   B00100000;            //enable sleep (SE=1)               BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
+  //disable Brown-Out Detection BOD
+  MCUCR |=   B10000100;            //set BODS and BODSE                BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
+  MCUCR = (MCUCR & B11111011) | B10000000; //then clear the BODSE and set the BODS
   __asm__  __volatile__("sleep");  //in line assembler to go to sleep
   // <---- microcontroller now sleep!
 
   // <---- microcontroller is back after wake up!
   MCUCR &=   B11011111;            //disable sleep (SE=1)              BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
+  ADCSRA |=  B10000000; //reactivate ADC with bit 7 in the ADCSRA register = ADEN = ADC Enabled ... to reactivate ADCSRA |= B10000000;
 }
 
 
