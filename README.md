@@ -15,4 +15,4 @@ Wih the same example from above, with a 12V 17,8mA LED strip we have this result
 The chip with the 10k Ohm potentiometer and 5V needs in dark = 2,08mA, in middle = 2,76mA and in full bright 2,16mA.
 The LED strip with 12V needs in dark = 9mA, in middle = 8,71mA and in full bright = 17,8mA.
 Together we have a power consumtion from dark = 10,4mW, in middle = 118mW and in full bright = 224,4mW.
-Thats more the result of a PWM power consumtion that we looking for.
+Thats more the result of a PWM power consumtion that we looking for, and the PWM is more accurat. It starts from zero (all off) up to 100% full bright. We can adjust this as we need in code.
