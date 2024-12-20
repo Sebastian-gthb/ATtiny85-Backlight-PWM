@@ -12,7 +12,7 @@ Thats a little bit strange and you dont have any engery saving with a dark backl
 That's the reason that i use the ATtiny85 for this job.
 
 
-The ATtiny85 needs only for the chip with a 10k Ohm potentiometer a maximum of 2,7mA and in the sleep mode (backlight disabled) 0,57mA. The potentiometer with 10k Ohm eats a some current. The chip him self needs only 0,13mA in sleep mode. That can be better, but i think i have all options in place.
+The ATtiny85 needs only for the chip with a 10k Ohm potentiometer a maximum of 2,7mA and in the sleep mode (backlight disabled) 0,57mA. The potentiometer with 10k Ohm eats some current (5V / 10k = 0,5mA). The chip him self needs only 0,13mA in sleep mode. That can be better, but i think i have all options in place.
 
 Wih the same example from above, with a 12V 17,8mA LED strip we have this result:
 
@@ -24,6 +24,8 @@ Together we have a power consumtion from dark = 10,4mW, in middle = 118mW and in
 
 Thats more the result of a PWM power consumtion that we looking for, and the PWM is more accurat. It starts from zero (all off) up to 100% full bright. We can adjust this as we need in code.
 
+
+The backlight enable signal can have no potential or high to enable the backlight. If you not connect the pin the backliht is on. Only if the pin is low (ground) the backlight will ne disabled and the chip go in to deep sleep. They will wake up if the signal change to high.
 
 The simple schematic for this project (now with a 1M Ohm potentiometer):
 ![schematics/Backlight-Schematic.png](https://github.com/Sebastian-gthb/ATtiny85-Backlight-PWM/blob/main/schematics/Backlight-Schematic.png)
