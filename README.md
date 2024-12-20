@@ -5,7 +5,14 @@ The chip needs the following:
 - a analog input for the brighness potentiometer
 - a PWM output to drive a transitor or MOSFET
 
-You can also use a NE555 as PWM driver. The good thing is, you can drive the NE555 with 12V and drive the LED backlight directly from the chip output. But this chip needs some external components and needs more power consumtion if the backlight is dark as the backlight is in full bright. Thats a little bit strange and you dont have any engery saving with a dark backlight. It's completely opposit. You need more energy with a dark backlight.
+You can also use a NE555 as PWM driver. The good thing is, you can drive the NE555 with 12V and drive the LED backlight directly from the chip output. But this chip needs some external components and needs more power consumtion if the backlight is dark as the backlight is in full bright. Example:
+I use a 12V LED strip that needs 17,8mA. With the NE555 in full bright the chip an the LED needs 18mA (216mW). With darkes mode the chip an the LED needs 21,1mA (253mW).
+Thats a little bit strange and you dont have any engery saving with a dark backlight. It's completely opposit. You need more energy with a dark backlight.
 That's the reason that i use the ATtiny85 for this job.
 
-The ATtiny85 needs only for the chip with a 10k Ohm potentiometer a maximum of 2,7mA and in the sleep mode (backlight disabled) 0,9mA. It can be better, but thats the first version. After enhancement of the sleep mode (adding deactivating ADC and disabling brown-out detection in sleep mode) the chip needs only 0,13mA and with the 10k Ohm potentiometer 0,57mA. Thats a little bit better.
+The ATtiny85 needs only for the chip with a 10k Ohm potentiometer a maximum of 2,7mA and in the sleep mode (backlight disabled) 0,57mA. The potentiometer with 10k Ohm eats a some current. The chip him self needs only 0,13mA in sleep mode. That can be better, but i think i have all options in place.
+Wih the same example from above, with a 12V 17,8mA LED strip we have this result:
+The chip with the 10k Ohm potentiometer and 5V needs in dark = 2,08mA, in middle = 2,76mA and in full bright 2,16mA.
+The LED strip with 12V needs in dark = 9mA, in middle = 8,71mA and in full bright = 17,8mA.
+Together we have a power consumtion from dark = 10,4mW, in middle = 118mW and in full bright = 224,4mW.
+Thats more the result of a PWM power consumtion that we looking for.
