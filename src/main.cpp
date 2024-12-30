@@ -31,7 +31,7 @@ void deepsleep() {
   // <---- microcontroller now sleep!
 
   // <---- microcontroller is back after wake up!
-  MCUCR &=   B11011111;            //disable sleep (SE=1)              BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
+  MCUCR &=   B11011111;            //disable sleep (SE=0)              BODS|PUD|SE|SM1|SM0|BODSE|ISC01|ISC00
   ADCSRA |=  B10000000; //reactivate ADC with bit 7 in the ADCSRA register = ADEN = ADC Enabled ... to reactivate ADCSRA |= B10000000;
 }
 
